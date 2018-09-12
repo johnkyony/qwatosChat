@@ -6,7 +6,7 @@ import router from './router'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import {store} from './store'
-import firebase from 'firebase'
+const firebase = require('./firebaseConfig.js')
 
 
 Vue.use(Vuetify, { theme: {
@@ -19,23 +19,14 @@ Vue.use(Vuetify, { theme: {
   warning: '#FFC107'
 }})
 
-var config = {
-  apiKey: "AIzaSyBJbWXUkV8kaTCV9cQ99evfimBhohGnNTo",
-  authDomain: "qwatoschat-d02bb.firebaseapp.com",
-  databaseURL: "https://qwatoschat-d02bb.firebaseio.com",
-  projectId: "qwatoschat-d02bb",
-  storageBucket: "qwatoschat-d02bb.appspot.com",
-  messagingSenderId: "831652407216"
-};
-firebase.initializeApp(config);
+
 
 
 
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
-const unsubscribe = firebase.auth()
-.onAuthStateChanged((firebaseUser) => {
+const unsubscribe = firebase.auth.onAuthStateChanged((firebaseUser) => {
   new Vue({
     el: '#app',
     router,
@@ -49,3 +40,4 @@ const unsubscribe = firebase.auth()
   })
   unsubscribe()
 })
+

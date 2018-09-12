@@ -49,6 +49,8 @@
 </template>
 
 <script>
+  import firebase from 'firebase'
+  import {store} from '@/store'
   export default {
     data () {
       return {
@@ -68,7 +70,9 @@
        menuItems (){
         if (this.isAuthenticated) {
           return [
-            { title: 'Home' , path: '/home' , icon: 'home'}
+            { title: 'Home' , path: '/home' , icon: 'home'},
+            { title: 'Favourites' , path: '/favourites' , icon: 'favorite'},
+            { title: 'Conversations', path: '/conversations' , icon: 'message'}
           ]
         } else {
           return [
@@ -82,6 +86,7 @@
       firebase.auth().onAuthStateChanged((firebaseUser) => {
         if (firebaseUser) {
           store.dispatch('autoSignIn' , firebaseUser)
+          store.dispatch('loadQwatos')
         }
       })
     },
