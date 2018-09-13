@@ -110,23 +110,37 @@ export const store = new Vuex.Store({
             })
             commit('setLoading' , false)
         },
-        likeQwatos({commit, state} , payload){
+        likeQwatos({commit, state , getters} , payload){
             commit('setLoading' , true)
+            if (getters.userLikedQwatos.find(qwato => qwato.providerId === payload.id)){
+                console.log('you have like this before')
+                commit('setLoading' , false)
+                return 
+            }
             firebase.likesCollection.add({
                 userId: state.user.id,
                 providerId: payload.id,
-                qwatoUrl: payload.photos[0].alt_sizes[0].url,
+                qwatoUrl: payload.src,
+                qwatoWidth: payload.width,
+                qwatoHeight: payload.height,
                 tags: payload.tags,
                 createdOn: new Date()
             })
             commit('setLoading', false)
         },
-        startNewConvo({commit , state} , payload){
+        startNewConvo({commit , state , getters} , payload){
             commit('setLoading', true)
+            if(getters.userConvo.find(convo => convo.providerId === payload.id )){
+                console.log('You have started this convo before')
+                commit('setLoading' , false)
+                return
+            }
             firebase.conversationsCollection.add({
                 userId: state.user.id,
                 providerId: payload.id,
-                qwatoUrl: payload.photos[0].alt_sizes[0].url,
+                qwatoUrl: payload.src,
+                qwatoWidth: payload.width,
+                qwatoHeight: payload.height,
                 tags: payload.tags,
                 active: true,
                 createdOn: new Date()

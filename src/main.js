@@ -35,6 +35,7 @@ const unsubscribe = firebase.auth.onAuthStateChanged((firebaseUser) => {
     created () {
       if (firebaseUser) {
         store.dispatch('autoSignIn', firebaseUser)
+        store.dispatch('loadQwatos')
       }
     }
   })

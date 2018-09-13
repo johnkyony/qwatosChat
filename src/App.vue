@@ -82,14 +82,6 @@
         }
       }
     },
-    created(){
-      firebase.auth().onAuthStateChanged((firebaseUser) => {
-        if (firebaseUser) {
-          store.dispatch('autoSignIn' , firebaseUser)
-          store.dispatch('loadQwatos')
-        }
-      })
-    },
     methods: {
       userSignOut(){
         this.$store.dispatch('userSignOut')
