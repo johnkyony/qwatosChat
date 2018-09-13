@@ -1,5 +1,5 @@
 <template>
-  <v-layout align-space-around justify-space-around column>
+  <v-layout align-center justify-center row>
     <v-flex xs12 sm6>    
         <v-container
           fluid
@@ -14,7 +14,7 @@
               <v-card>
                 <v-img
                   :src="card.src"
-                  height="200px"
+                  height="400px"
                 >
                   <v-container
                     fill-height
@@ -61,11 +61,7 @@ export default {
         post.width = qwato.photos[0].alt_sizes[0].width
         post.height = qwato.photos[0].alt_sizes[0].height
         post.tags = qwato.tags
-        if (qwato.photos[0].alt_sizes[0].width >= 500){
-          post.flex = 12
-        } else{
-          post.flex = 6
-        }
+        post.flex = 12
         
         return post
       })

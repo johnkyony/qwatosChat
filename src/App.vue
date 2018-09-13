@@ -24,7 +24,7 @@
         </v-toolbar-side-icon>
       </span>
       <v-toolbar-title>
-        <router-link to="/" tag="span" style="cursor: pointer">
+        <router-link to="/home" tag="span" style="cursor: pointer">
             {{ appTitle }}
         </router-link>
         </v-toolbar-title>
